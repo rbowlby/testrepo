@@ -1,0 +1,20 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: gn-flaskr
+  labels:
+    app: gn-flaskr
+    owner: "gracenote.user"
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: gn-flaskr
+        owner: "gracenote.user"
+    spec:
+      containers:
+        - name: gn-flaskr
+          image: docker-sandbox-registry.labs.gracenote.com/gnuser/mc_gnuser:1
+          ports:
+            - containerPort: 5000

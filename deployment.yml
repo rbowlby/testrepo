@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gn-flaskr
+  labels:
+    app: gn-flaskr
+spec:
+  selector:
+    app: gn-flaskr
+  #clusterIP: 10.104.24.0
+  #externalTrafficPolicy: Cluster
+  ports:
+ # - nodePort: 32612
+  - port: 5000
+    protocol: TCP
+    targetPort: 5000
+  sessionAffinity: None
+  type: LoadBalancer
+#status:
+#  loadBalancer: {}
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: gn-flaskr
+  labels:
+    owner: "gracenote.user"
+    app: gn-flaskr
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        owner: "gracenote.user"
+        app: gn-flaskr
+    spec:
+      containers:
+        - name: gn-flaskr
+          image: gn-flaskr:1
+          ports:
+            - containerPort: 5000
