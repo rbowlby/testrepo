@@ -1,5 +1,4 @@
 pipeline { 
-    #agent { label 'ubuntu14' }
     stages {
         stage('Test'){
             steps {
